@@ -9,14 +9,27 @@ import {
   InputLabel,
   FormControl,
 } from '@mui/material';
+import { useCarbonContext } from '../context/CarbonContext';
 
 interface ConsumptionCardProps {
   title: string;
 }
 
 const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
-  const [consumption, setConsumption] = React.useState<number | string>('');
-  const [period, setPeriod] = React.useState<string>('day');
+  const { consumptions, periods, setConsumption, setPeriod } =
+    useCarbonContext();
+
+  const consumption = consumptions[title] || '';
+  const period = periods[title] || 'day';
+
+  const handleConsumptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setConsumption(title, value);
+  };
+
+  const handlePeriodChange = (e: React.ChangeEvent<{ value: unknown }>) => {
+    setPeriod(title, e.target.value as string);
+  };
 
   return (
     <Card style={{ margin: '20px 0' }}>
@@ -26,7 +39,7 @@ const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
           label="Consumption (kCal)"
           type="number"
           value={consumption}
-          onChange={(e) => setConsumption(e.target.value)}
+          onChange={handleConsumptionChange}
           fullWidth
           margin="normal"
         />
@@ -35,7 +48,7 @@ const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
           <Select
             labelId="period-select-label"
             value={period}
-            onChange={(e) => setPeriod(e.target.value as string)}
+            onChange={(e: any) => handlePeriodChange(e)}
             label="Period"
           >
             <MenuItem value="day">Day</MenuItem>

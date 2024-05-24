@@ -2,11 +2,9 @@ import React from 'react';
 import { Container, Grid, Typography, Box } from '@mui/material';
 import ConsumptionCard from './ConsumptionCard';
 
-interface FoodPageProps {
-  onNext: () => void;
-}
+interface FoodPageProps {}
 
-const FoodPage: React.FC<FoodPageProps> = ({ onNext }) => {
+const FoodPage: React.FC<FoodPageProps> = () => {
   const cardTitles = ['Meat', 'Vegetables', 'Dairy', 'Snacks'];
 
   return (
@@ -22,12 +20,13 @@ const FoodPage: React.FC<FoodPageProps> = ({ onNext }) => {
           Calculate Your Food Carbon Footprint
         </Typography>
         <Grid container spacing={2} justifyContent="center">
-          {cardTitles.map((title) => (
+          {cardTitles.map((title, index) => (
             <Grid item xs={12} sm={6} md={3} key={title}>
               <ConsumptionCard title={title} />
             </Grid>
           ))}
         </Grid>
+        <Box mt={2}></Box>
       </Box>
     </Container>
   );

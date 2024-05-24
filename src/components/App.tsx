@@ -17,7 +17,6 @@ import ResultsPage from './ResultsPage';
 
 const App: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [totalEmissions, setTotalEmissions] = useState(0);
 
   const steps = ['Start', 'Food Consumption', 'Travel Consumption', 'Results'];
 
@@ -34,11 +33,11 @@ const App: React.FC = () => {
       case 0:
         return <InitialPage onNext={handleNext} />;
       case 1:
-        return <FoodPage onNext={handleNext} />;
+        return <FoodPage />;
       case 2:
-        return <TravelPage onNext={handleNext} />;
+        return <TravelPage />;
       case 3:
-        return <ResultsPage totalEmissions={totalEmissions} />;
+        return <ResultsPage />;
       default:
         return <InitialPage onNext={handleNext} />;
     }
@@ -77,7 +76,7 @@ const App: React.FC = () => {
                 Back
               </Button>
             )}
-            {activeStep > 0 && activeStep < steps.length - 1 && (
+            {activeStep < steps.length - 1 && (
               <Button variant="contained" color="primary" onClick={handleNext}>
                 {activeStep === steps.length - 2 ? 'Finish' : 'Next'}
               </Button>

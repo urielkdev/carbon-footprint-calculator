@@ -2,12 +2,10 @@ import React from 'react';
 import { Container, Grid, Typography, Box } from '@mui/material';
 import ConsumptionCard from './ConsumptionCard';
 
-interface TravelPageProps {
-  onNext: () => void;
-}
+interface FoodPageProps {}
 
-const TravelPage: React.FC<TravelPageProps> = ({ onNext }) => {
-  const cardTitles = ['Car', 'Bus', 'Train', 'Flight'];
+const FoodPage: React.FC<FoodPageProps> = () => {
+  const cardTitles = ['Vehicle', 'Bus', 'Metro', 'Taxi', 'Rail', 'Flying'];
 
   return (
     <Container>
@@ -19,10 +17,10 @@ const TravelPage: React.FC<TravelPageProps> = ({ onNext }) => {
         minHeight="70vh"
       >
         <Typography variant="h4" gutterBottom>
-          Calculate Your Travel Carbon Footprint
+          Calculate Your Food Carbon Footprint
         </Typography>
         <Grid container spacing={2} justifyContent="center">
-          {cardTitles.map((title) => (
+          {cardTitles.map((title, index) => (
             <Grid item xs={12} sm={6} md={3} key={title}>
               <ConsumptionCard title={title} />
             </Grid>
@@ -33,4 +31,4 @@ const TravelPage: React.FC<TravelPageProps> = ({ onNext }) => {
   );
 };
 
-export default TravelPage;
+export default FoodPage;
