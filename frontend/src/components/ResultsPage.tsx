@@ -15,7 +15,7 @@ const ResultsPage: React.FC = () => {
   // TODO: change this
   const data = Object.keys(consumptions).map((key) => ({
     name: key,
-    value: consumptions[key],
+    value: consumptions[key].value,
   }));
 
   return (
