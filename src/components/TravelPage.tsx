@@ -2,9 +2,7 @@ import React from 'react';
 import { Container, Grid, Typography, Box } from '@mui/material';
 import ConsumptionCard from './ConsumptionCard';
 
-interface FoodPageProps {}
-
-const FoodPage: React.FC<FoodPageProps> = () => {
+const FoodPage: React.FC = () => {
   const cardTitles = ['Vehicle', 'Bus', 'Metro', 'Taxi', 'Rail', 'Flying'];
 
   return (

@@ -18,7 +18,7 @@ import ResultsPage from './ResultsPage';
 const App: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = ['Start', 'Food Consumption', 'Travel Consumption', 'Results'];
+  const steps = ['Start', 'Food', 'Travel', 'Results'];
 
   const handleNext = () => {
     setActiveStep((prevStep) => prevStep + 1);
@@ -30,8 +30,6 @@ const App: React.FC = () => {
 
   const getStepContent = (step: number) => {
     switch (step) {
-      case 0:
-        return <InitialPage onNext={handleNext} />;
       case 1:
         return <FoodPage />;
       case 2:
@@ -76,7 +74,7 @@ const App: React.FC = () => {
                 Back
               </Button>
             )}
-            {activeStep < steps.length - 1 && (
+            {activeStep > 0 && activeStep < steps.length - 1 && (
               <Button variant="contained" color="primary" onClick={handleNext}>
                 {activeStep === steps.length - 2 ? 'Finish' : 'Next'}
               </Button>

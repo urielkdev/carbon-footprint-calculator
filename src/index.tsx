@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { CarbonProvider } from './context/CarbonContext';
+import { CarbonProvider } from './contexts/CarbonContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

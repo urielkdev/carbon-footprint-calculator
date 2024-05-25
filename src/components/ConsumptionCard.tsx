@@ -8,27 +8,30 @@ import {
   Select,
   InputLabel,
   FormControl,
+  SelectChangeEvent,
 } from '@mui/material';
-import { useCarbonContext } from '../context/CarbonContext';
+import { useCarbonContext } from '../contexts/CarbonContext';
 
 interface ConsumptionCardProps {
   title: string;
 }
 
 const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
-  const { consumptions, periods, setConsumption, setPeriod } =
+  const { consumptions, setConsumptionValue, setConsumptionPeriod } =
     useCarbonContext();
 
-  const consumption = consumptions[title] || '';
-  const period = periods[title] || 'day';
+  console.log(consumptions);
+
+  const consumptionValue = consumptions[title]?.value || 0;
+  const consumptionPeriod = consumptions[title]?.period || 'day';
 
   const handleConsumptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    setConsumption(title, value);
+    setConsumptionValue(title, value);
   };
 
-  const handlePeriodChange = (e: React.ChangeEvent<{ value: unknown }>) => {
-    setPeriod(title, e.target.value as string);
+  const handlePeriodChange = (e: SelectChangeEvent<any>) => {
+    setConsumptionPeriod(title, e.target.value as string);
   };
 
   return (
@@ -38,7 +41,7 @@ const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
         <TextField
           label="Consumption (kCal)"
           type="number"
-          value={consumption}
+          value={consumptionValue}
           onChange={handleConsumptionChange}
           fullWidth
           margin="normal"
@@ -47,8 +50,8 @@ const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
           <InputLabel id="period-select-label">Period</InputLabel>
           <Select
             labelId="period-select-label"
-            value={period}
-            onChange={(e: any) => handlePeriodChange(e)}
+            value={consumptionPeriod}
+            onChange={(e: SelectChangeEvent<any>) => handlePeriodChange(e)}
             label="Period"
           >
             <MenuItem value="day">Day</MenuItem>
