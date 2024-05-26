@@ -1,12 +1,38 @@
 import { EmissionsFactorMapper } from 'src/mappers';
 import { convertPeriod } from 'src/utils';
 
-import { CalculateConsumptionDto } from '../dto/create-consumption.dto';
+import {
+  CalculateConsumptionDto,
+  CalculateConsumptionsDto,
+} from '../dto/create-consumption.dto';
 
 export const calculateConsumptionsUseCase = ({
-  emissionFactor,
-  value,
-  period,
-}: CalculateConsumptionDto) => {
-  return convertPeriod(value * EmissionsFactorMapper[emissionFactor], period);
+  consumptions,
+}: CalculateConsumptionsDto) => {
+  const calculatedConsumptions = consumptions.map(calculateConsumption);
+
+  return {
+    consumptions: calculatedConsumptions,
+    totalEmissions: +sumEmissions(calculatedConsumptions).toFixed(2),
+  };
+};
+
+const calculateConsumption = (consumption: CalculateConsumptionDto) => {
+  const { emissionFactor, value, period } = consumption;
+
+  const emissions = convertPeriod(
+    value * EmissionsFactorMapper[emissionFactor],
+    period,
+  );
+
+  return {
+    ...consumption,
+    emissions,
+  };
+};
+
+const sumEmissions = (
+  consumptions: (CalculateConsumptionDto & { emissions: number })[],
+) => {
+  return consumptions.reduce((acc, { emissions }) => acc + emissions, 0);
 };
