@@ -4,6 +4,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsPositive,
   ValidateNested,
 } from 'class-validator';
 import { ConsumptionPeriodEnum, EmissionsFactorEnum } from 'src/enums';
@@ -15,6 +16,7 @@ export class CalculateConsumptionDto {
 
   @IsNumber({ allowNaN: false })
   @IsNotEmpty()
+  @IsPositive()
   value: number;
 
   @IsEnum(ConsumptionPeriodEnum)
@@ -26,5 +28,5 @@ export class CalculateConsumptionsDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CalculateConsumptionDto)
-  consumptions: [CalculateConsumptionDto];
+  consumptions: CalculateConsumptionDto[];
 }

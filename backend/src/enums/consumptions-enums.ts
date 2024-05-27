@@ -7,7 +7,7 @@ export enum ConsumptionPeriodEnum {
 
 export enum EmissionsFactorEnum {
   HOUSING_ELECTRICITY = 'housingElectricity',
-  HOUSING_NATURALGAS = 'housingNaturalGas',
+  HOUSING_NATURAL_GAS = 'housingNaturalGas',
   HOUSING_FUEL_OIL = 'housingFuelOil',
   HOUSING_LPG = 'housingLPG',
   HOUSING_WASTE = 'housingWaste',

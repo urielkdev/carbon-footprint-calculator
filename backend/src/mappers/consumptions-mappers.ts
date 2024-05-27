@@ -12,7 +12,7 @@ export const PeriodMultiplierMapper: Record<ConsumptionPeriodEnum, number> = {
 export const EmissionsFactorMapper: Record<EmissionsFactorEnum, number> = {
   // HOUSING
   [EmissionsFactorEnum.HOUSING_ELECTRICITY]: 0.7, // kWh
-  [EmissionsFactorEnum.HOUSING_NATURALGAS]: 0.22, // kWh
+  [EmissionsFactorEnum.HOUSING_NATURAL_GAS]: 0.22, // kWh
   [EmissionsFactorEnum.HOUSING_FUEL_OIL]: 3.1, // litre
   [EmissionsFactorEnum.HOUSING_LPG]: 1.8, // litre
   [EmissionsFactorEnum.HOUSING_WASTE]: 1.0,

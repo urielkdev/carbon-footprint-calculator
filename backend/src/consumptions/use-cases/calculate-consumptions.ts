@@ -20,10 +20,10 @@ export const calculateConsumptionsUseCase = ({
 const calculateConsumption = (consumption: CalculateConsumptionDto) => {
   const { emissionFactor, value, period } = consumption;
 
-  const emissions = convertPeriod(
+  const emissions = +convertPeriod(
     value * EmissionsFactorMapper[emissionFactor],
     period,
-  );
+  ).toFixed(2);
 
   return {
     ...consumption,
@@ -31,8 +31,6 @@ const calculateConsumption = (consumption: CalculateConsumptionDto) => {
   };
 };
 
-const sumEmissions = (
-  consumptions: (CalculateConsumptionDto & { emissions: number })[],
-) => {
+const sumEmissions = (consumptions: { emissions: number }[]) => {
   return consumptions.reduce((acc, { emissions }) => acc + emissions, 0);
 };
