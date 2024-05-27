@@ -1,37 +1,40 @@
-import React from 'react';
 import {
   Card,
   CardContent,
-  Typography,
-  TextField,
+  FormControl,
+  InputLabel,
   MenuItem,
   Select,
-  InputLabel,
-  FormControl,
   SelectChangeEvent,
+  TextField,
+  Typography,
 } from '@mui/material';
+import React from 'react';
 import { useCarbonContext } from '../contexts/CarbonContext';
+import { CardType } from '../types';
 
 interface ConsumptionCardProps {
-  title: string;
+  card: CardType;
 }
 
-const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
+const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ card }) => {
   const { consumptions, setConsumptionValue, setConsumptionPeriod } =
     useCarbonContext();
 
+  const { title, emissionFactor, defaultPeriod, unit } = card;
   console.log(consumptions);
 
-  const consumptionValue = consumptions[title]?.value || 0;
-  const consumptionPeriod = consumptions[title]?.period || 'day';
+  const consumptionValue = consumptions[emissionFactor]?.value || 0;
+  const consumptionPeriod =
+    consumptions[emissionFactor]?.period || defaultPeriod;
 
   const handleConsumptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    setConsumptionValue(title, value);
+    setConsumptionValue(emissionFactor, value);
   };
 
   const handlePeriodChange = (e: SelectChangeEvent<any>) => {
-    setConsumptionPeriod(title, e.target.value as string);
+    setConsumptionPeriod(emissionFactor, e.target.value as string);
   };
 
   return (
@@ -39,7 +42,7 @@ const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
       <CardContent>
         <Typography variant="h5">{title}</Typography>
         <TextField
-          label="Consumption (kCal)"
+          label={`Consumption (${unit ? unit : 'unit'})`}
           type="number"
           value={consumptionValue}
           onChange={handleConsumptionChange}
@@ -54,7 +57,9 @@ const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ title }) => {
             onChange={(e: SelectChangeEvent<any>) => handlePeriodChange(e)}
             label="Period"
           >
+            {/* TODO: Change this to iterate the ConsumptionPeriodMapper */}
             <MenuItem value="day">Day</MenuItem>
+            <MenuItem value="week">Week</MenuItem>
             <MenuItem value="month">Month</MenuItem>
             <MenuItem value="year">Year</MenuItem>
           </Select>

@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
 import {
-  Container,
   AppBar,
-  Toolbar,
-  Typography,
-  Stepper,
+  Box,
+  Button,
+  Container,
   Step,
   StepLabel,
-  Button,
-  Box,
+  Stepper,
+  Toolbar,
+  Typography,
 } from '@mui/material';
+import React, { useState } from 'react';
+import { CATEGORIES } from '../constants';
+import { EmissionCategories } from '../enums';
+import ConsumptionPage from './HousingPage';
 import InitialPage from './InitialPage';
-import FoodPage from './FoodPage';
-import TravelPage from './TravelPage';
 import ResultsPage from './ResultsPage';
 
 const App: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = ['Start', 'Food', 'Travel', 'Results'];
+  const steps = ['Start', ...CATEGORIES, 'Results'];
 
   const handleNext = () => {
     setActiveStep((prevStep) => prevStep + 1);
@@ -29,12 +30,17 @@ const App: React.FC = () => {
   };
 
   const getStepContent = (step: number) => {
+    const stepName = steps[step] as EmissionCategories;
+
+    // If the step is a valid category,
+    // we render the generic page for this category
+    // that way its easier to create more pages in the future
+    if (Object.values(EmissionCategories).includes(stepName)) {
+      return <ConsumptionPage category={stepName} />;
+    }
+
     switch (step) {
-      case 1:
-        return <FoodPage />;
-      case 2:
-        return <TravelPage />;
-      case 3:
+      case steps.length - 1:
         return <ResultsPage />;
       default:
         return <InitialPage onNext={handleNext} />;

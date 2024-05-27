@@ -1,8 +1,8 @@
+import { Box, Container, Typography } from '@mui/material';
 import React from 'react';
-import { Container, Typography, Box } from '@mui/material';
+import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
+import { CHART_COLORS } from '../constants';
 import { useCarbonContext } from '../contexts/CarbonContext';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
-import { COLORS } from '../constants';
 import { sumConsumptionsValues } from '../utils';
 
 const ResultsPage: React.FC = () => {
@@ -49,7 +49,7 @@ const ResultsPage: React.FC = () => {
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
+                fill={CHART_COLORS[index % CHART_COLORS.length]}
               />
             ))}
           </Pie>

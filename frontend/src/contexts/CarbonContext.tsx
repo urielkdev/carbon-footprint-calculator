@@ -1,38 +1,52 @@
 import React, { createContext, useContext, useState } from 'react';
-import {
-  CarbonContext as CarbonContextInterface,
-  Consumptions,
-} from '../types';
+import { ConsumptionPeriodEnum, EmissionsFactorEnum } from '../enums';
+import { CarbonContextType, ConsumptionsType } from '../types';
 
-const CarbonContext = createContext<CarbonContextInterface | undefined>(
-  undefined
-);
+const CarbonContext = createContext<CarbonContextType | undefined>(undefined);
 
 export const useCarbonContext = () => {
   const context = useContext(CarbonContext);
   if (!context) {
-    throw new Error('useCarbonContext must be used within a CarbonProvider');
+    throw new Error(
+      'useCarbonContext must be used within a ConsumptionsProvider'
+    );
   }
   return context;
 };
 
-// TODO: change the 'any'
-export const CarbonProvider: React.FC<{ children: React.ReactNode }> = ({
+export const ConsumptionsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [consumptions, setConsumptions] = useState<Consumptions>({});
+  const [consumptions, setConsumptions] = useState<ConsumptionsType>({});
 
-  const setConsumptionValue = (title: string, value: number) => {
+  const setConsumptionValue = (
+    emissionFactor: EmissionsFactorEnum,
+    value: number
+  ) => {
     setConsumptions((prevConsumptions) => ({
       ...prevConsumptions,
-      [title]: { ...prevConsumptions[title], value },
+      [emissionFactor]: {
+        emissionFactor: emissionFactor,
+        value,
+        period:
+          prevConsumptions[emissionFactor]?.period ||
+          ConsumptionPeriodEnum.MONTH,
+        // TODO: see this later, to get the cards[].defaultPeriod
+      },
     }));
   };
 
-  const setConsumptionPeriod = (title: string, period: string) => {
+  const setConsumptionPeriod = (
+    emissionFactor: EmissionsFactorEnum,
+    period: string
+  ) => {
     setConsumptions((prevConsumptions) => ({
       ...prevConsumptions,
-      [title]: { ...prevConsumptions[title], period },
+      [emissionFactor]: {
+        emissionFactor: emissionFactor,
+        value: prevConsumptions[emissionFactor]?.value || 0,
+        period,
+      },
     }));
   };
 

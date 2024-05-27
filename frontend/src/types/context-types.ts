@@ -1,14 +1,14 @@
-export interface Consumption {
-  value: number;
-  period: string;
-}
+import { EmissionsFactorEnum } from '../enums';
+import { ConsumptionsType } from './';
 
-export interface Consumptions {
-  [key: string]: Consumption;
-}
-
-export interface CarbonContext {
-  consumptions: Consumptions;
-  setConsumptionValue: (title: string, value: number) => void;
-  setConsumptionPeriod: (title: string, period: string) => void;
-}
+export type CarbonContextType = {
+  consumptions: ConsumptionsType;
+  setConsumptionValue: (
+    emissionFactor: EmissionsFactorEnum,
+    value: number
+  ) => void;
+  setConsumptionPeriod: (
+    emissionFactor: EmissionsFactorEnum,
+    period: string
+  ) => void;
+};
