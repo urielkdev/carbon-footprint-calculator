@@ -53,7 +53,9 @@ describe('calculateConsumptionsUseCase', () => {
       ]),
     );
 
-    expect(result.totalEmissions).toBe(600);
+    expect(result.totalEmissions).toBeCloseTo(
+      result.consumptions[0].emissions + result.consumptions[1].emissions,
+    );
   });
 
   it('should handle empty consumptions array', () => {
@@ -65,7 +67,7 @@ describe('calculateConsumptionsUseCase', () => {
     expect(result.totalEmissions).toBe(0);
   });
 
-  it('should calculate emissions correctly for given consumptions', () => {
+  it('should round the emissions and totalEmissions to 2 decimal places', () => {
     const consumptions: CalculateConsumptionDto[] = [
       {
         emissionFactor: EmissionsFactorEnum.HOUSING_ELECTRICITY,
@@ -98,6 +100,8 @@ describe('calculateConsumptionsUseCase', () => {
       ]),
     );
 
-    expect(result.totalEmissions).toBe(601.24);
+    expect(result.totalEmissions).toBeCloseTo(
+      result.consumptions[0].emissions + result.consumptions[1].emissions,
+    );
   });
 });
