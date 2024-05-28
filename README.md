@@ -2,6 +2,8 @@
 
 This app is the solution to what is said in the file ["sinai-fullstack-test.pdf"](sinai-fullstack-test.pdf)
 
+The Emission Factor values that I couldn't find a source for, I left them with an EF of 1.0 for now, but its easy to fix it, just change the values in the backend mapper.
+
 The cards were made in a completely dynamic way, thinking that they could be used with a CMS in the future, so just add/modify/remove cards from the CARDS array in the constants.ts file that will be reflected in the pages shown to the user, this is the conficuration for the HOUSING_ELECTRICITY for example:
 
 ```

@@ -7,6 +7,7 @@ import { useWindowDimensions } from '../../hooks';
 import { EmissionsFactorTitleMapper } from '../../mappers';
 import { ApiCalculateConsumptionsResType } from '../../types';
 import { api } from '../../utils';
+import ResultsTable from '../ResultsTable/ResultsTable';
 
 const ResultsPage: React.FC = () => {
   const { consumptions } = useConsumptionsContext();
@@ -55,7 +56,7 @@ const ResultsPage: React.FC = () => {
           Annual CO2 Emissions: {totalEmissions.toFixed(2)} kg CO2e/yr.
         </Typography>
         {/* change to chart of material ui */}
-        <PieChart width={width - 20} height={500}>
+        <PieChart width={width - 20} height={500} margin={{ bottom: 20 }}>
           <Pie
             data={data}
             cx={(width - 20) / 2}
@@ -78,6 +79,10 @@ const ResultsPage: React.FC = () => {
           <Tooltip />
           <Legend />
         </PieChart>
+        <ResultsTable
+          calculatedConsumptions={calculatedConsumptions}
+          totalEmissions={totalEmissions}
+        />
       </Box>
       <Snackbar
         open={snackbar.open}
