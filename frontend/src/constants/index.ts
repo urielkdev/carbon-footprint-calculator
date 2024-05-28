@@ -93,13 +93,6 @@ export const CARDS: CardType[] = [
     unit: 'km',
   },
   {
-    title: EmissionsFactorTitleMapper[EmissionsFactorEnum.TRAVEL_FLYING],
-    emissionFactor: EmissionsFactorEnum.TRAVEL_FLYING,
-    category: EmissionCategories.TRAVEL,
-    defaultPeriod: ConsumptionPeriodEnum.MONTH,
-    unit: 'km',
-  },
-  {
     title: EmissionsFactorTitleMapper[EmissionsFactorEnum.FOOD_RED_MEAT],
     emissionFactor: EmissionsFactorEnum.FOOD_RED_MEAT,
     category: EmissionCategories.FOOD,

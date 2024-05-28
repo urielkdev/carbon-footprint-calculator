@@ -1,8 +1,8 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import React from 'react';
-import { CARDS } from '../constants';
-import { EmissionCategories } from '../enums';
-import ConsumptionCard from './ConsumptionCard';
+import { CARDS } from '../../constants';
+import { EmissionCategories } from '../../enums';
+import ConsumptionCard from '../ConsumptionCard/ConsumptionCard';
 
 interface ConsumptionPageProps {
   category: EmissionCategories;

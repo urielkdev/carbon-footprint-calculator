@@ -10,9 +10,9 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import { useCarbonContext } from '../contexts/CarbonContext';
-import { ConsumptionPeriodEnum } from '../enums';
-import { CardType } from '../types';
+import { useConsumptionsContext } from '../../contexts/CarbonContext';
+import { ConsumptionPeriodEnum } from '../../enums';
+import { CardType } from '../../types';
 
 interface ConsumptionCardProps {
   card: CardType;
@@ -21,7 +21,7 @@ interface ConsumptionCardProps {
 // TODO: fix unecessary re-render when calling this component
 const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ card }) => {
   const { consumptions, setConsumptionValue, setConsumptionPeriod } =
-    useCarbonContext();
+    useConsumptionsContext();
 
   const { title, emissionFactor, defaultPeriod, unit } = card;
 

@@ -10,11 +10,11 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { CATEGORIES } from '../constants';
-import { EmissionCategories } from '../enums';
-import ConsumptionPage from './ConsumptionPage';
-import InitialPage from './InitialPage';
-import ResultsPage from './ResultsPage';
+import { CATEGORIES } from '../../constants';
+import { EmissionCategories } from '../../enums';
+import ConsumptionPage from '../ConsumptionPage/ConsumptionPage';
+import InitialPage from '../InitialPage/InitialPage';
+import ResultsPage from '../ResultsPage/ResultsPage';
 
 const App: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);

@@ -1,20 +1,23 @@
 import { Alert, Box, Container, Snackbar, Typography } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
-import { CHART_COLORS } from '../constants';
-import { useCarbonContext } from '../contexts/CarbonContext';
-import { EmissionsFactorTitleMapper } from '../mappers';
-import { ApiCalculateConsumptionsResType } from '../types';
-import { api } from '../utils';
+import { CHART_COLORS } from '../../constants';
+import { useConsumptionsContext } from '../../contexts/CarbonContext';
+import { useWindowDimensions } from '../../hooks';
+import { EmissionsFactorTitleMapper } from '../../mappers';
+import { ApiCalculateConsumptionsResType } from '../../types';
+import { api } from '../../utils';
 
 const ResultsPage: React.FC = () => {
-  const { consumptions } = useCarbonContext();
+  const { consumptions } = useConsumptionsContext();
 
   const [calculatedConsumptions, setCalculatedConsumptions] = useState<
     ApiCalculateConsumptionsResType[]
   >([]);
   const [totalEmissions, setTotalEmissions] = useState<number>(0);
   const [snackbar, setSnackbar] = React.useState({ open: false, message: '' });
+
+  const { width } = useWindowDimensions();
 
   const fetchDatas = useCallback(async () => {
     try {
@@ -52,16 +55,16 @@ const ResultsPage: React.FC = () => {
           Annual CO2 Emissions: {totalEmissions.toFixed(2)} kg CO2e/yr.
         </Typography>
         {/* change to chart of material ui */}
-        <PieChart width={500} height={500}>
+        <PieChart width={width - 20} height={500}>
           <Pie
             data={data}
-            cx={250}
+            cx={(width - 20) / 2}
             cy={250}
             labelLine={false}
             label={({ name, percent }: any) =>
               `${name}: ${(percent * 100).toFixed(0)}%`
             }
-            outerRadius={150}
+            outerRadius={100 + width / 25}
             fill="#8884d8"
             dataKey="value"
           >

@@ -79,3 +79,11 @@ $ yarn install
 # development
 $ yarn start
 ```
+
+### Test
+
+For the frontend I decided not to spend too much time testing and focus on other things. But I did some to show that I know
+
+```bash
+$ yarn test
+```

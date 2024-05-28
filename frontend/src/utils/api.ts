@@ -4,7 +4,7 @@ import {
 } from '../types';
 
 // TODO: chante to a env
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:3000';
 
 const calculateConsumptions = async (data: ConsumptionsType) => {
   const body = buildBody(data);

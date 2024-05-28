@@ -2,13 +2,15 @@ import React, { createContext, useContext, useState } from 'react';
 import { ConsumptionPeriodEnum, EmissionsFactorEnum } from '../enums';
 import { CarbonContextType, ConsumptionsType } from '../types';
 
-const CarbonContext = createContext<CarbonContextType | undefined>(undefined);
+export const CarbonContext = createContext<CarbonContextType | undefined>(
+  undefined
+);
 
-export const useCarbonContext = () => {
+export const useConsumptionsContext = () => {
   const context = useContext(CarbonContext);
   if (!context) {
     throw new Error(
-      'useCarbonContext must be used within a ConsumptionsProvider'
+      'useConsumptionsContext must be used within a ConsumptionsProvider'
     );
   }
   return context;
@@ -31,7 +33,6 @@ export const ConsumptionsProvider: React.FC<{ children: React.ReactNode }> = ({
         period:
           prevConsumptions[emissionFactor]?.period ||
           ConsumptionPeriodEnum.MONTH,
-        // TODO: see this later, to get the cards[].defaultPeriod
       },
     }));
   };
