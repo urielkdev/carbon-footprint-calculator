@@ -3,26 +3,27 @@ import {
   EmissionCategories,
   EmissionsFactorEnum,
 } from '../enums';
+import { EmissionsFactorTitleMapper } from '../mappers';
 import { CardType } from '../types';
 
 // TODO: add more cards here
 export const CARDS: CardType[] = [
   {
-    title: 'Electricity',
+    title: EmissionsFactorTitleMapper[EmissionsFactorEnum.HOUSING_ELECTRICITY],
     emissionFactor: EmissionsFactorEnum.HOUSING_ELECTRICITY,
     category: EmissionCategories.HOUSING,
     defaultPeriod: ConsumptionPeriodEnum.MONTH,
     unit: 'kWh',
   },
   {
-    title: 'Natural Gas',
+    title: EmissionsFactorTitleMapper[EmissionsFactorEnum.HOUSING_NATURAL_GAS],
     emissionFactor: EmissionsFactorEnum.HOUSING_NATURAL_GAS,
     category: EmissionCategories.HOUSING,
     defaultPeriod: ConsumptionPeriodEnum.MONTH,
     unit: 'kWh',
   },
   {
-    title: 'Vehicle',
+    title: EmissionsFactorTitleMapper[EmissionsFactorEnum.TRAVEL_VEHICLE],
     emissionFactor: EmissionsFactorEnum.TRAVEL_VEHICLE,
     category: EmissionCategories.TRAVEL,
     defaultPeriod: ConsumptionPeriodEnum.MONTH,

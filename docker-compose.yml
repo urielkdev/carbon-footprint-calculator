@@ -1,0 +1,24 @@
+version: '3.5'
+
+services:
+  carbon-footprint-calculator-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: carbon-footprint-calculator-backend
+    environment:
+      - PORT=3000
+    ports:
+      - '3000:3000'
+
+  carbon-footprint-calculator-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: carbon-footprint-calculator-frontend
+    depends_on:
+      - carbon-footprint-calculator-backend
+    environment:
+      - PORT=4000
+    ports:
+      - '4000:4000'

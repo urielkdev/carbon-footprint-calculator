@@ -30,7 +30,6 @@ const ResultsPage: React.FC = () => {
     fetchDatas();
   }, [fetchDatas]);
 
-  // TODO: change this
   const data = calculatedConsumptions.map(({ emissionFactor, emissions }) => ({
     name: EmissionsFactorTitleMapper[emissionFactor],
     value: emissions,
@@ -51,6 +50,7 @@ const ResultsPage: React.FC = () => {
         <Typography variant="h5" gutterBottom>
           Annual CO2 Emissions: {totalEmissions.toFixed(2)} kg CO2e/yr.
         </Typography>
+        {/* change to chart of material ui */}
         <PieChart width={500} height={500}>
           <Pie
             data={data}
