@@ -14,6 +14,16 @@ The cards were made in a completely dynamic way, thinking that they could be use
 }
 ```
 
+### Demo
+
+There is a demo running, but as it is hosted on a free server, the backend takes around 1 minute to start.
+
+backend: https://carbon-footprint-calculator-olu0.onrender.com/docs
+
+frontend: https://carbon-footprint-calculator-three.vercel.app/
+
+To test the demo, go to the backend link, wait about 1 minute for the server to start, then go to the frontend link
+
 ## Run entire application with Docker Compose
 
 ```bash
