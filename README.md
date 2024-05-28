@@ -12,6 +12,8 @@ $ docker compose up --build
 
 ## Backend: Run standalone
 
+You can make resquests in the swagger in `/docs`
+
 ### Before All
 
 ```bash
@@ -70,7 +72,7 @@ $ yarn start
 
 - [x] All routes
 - [x] Unit tests
-- [ ] Swagger base_url/docs
+- [x] Swagger base_url/docs
 - [x] Added insomnia-collection.json that can be imported into Insomnia or Postman
 - [x] ESLint/Prettier
 - [ ] Solve the 'TODO's comments (control+shift+f and search for 'TODO')
