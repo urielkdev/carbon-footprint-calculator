@@ -2,7 +2,17 @@
 
 This app is the solution to what is said in the file ["sinai-fullstack-test.pdf"](sinai-fullstack-test.pdf)
 
-Download the [Insomnia collection]("insomnia-collection.json") to easier test the backend routes
+The cards were made in a completely dynamic way, thinking that they could be used with a CMS in the future, so just add/modify/remove cards from the CARDS array in the constants.ts file that will be reflected in the pages shown to the user, this is the conficuration for the HOUSING_ELECTRICITY for example:
+
+```
+{
+    title: EmissionsFactorTitleMapper[EmissionsFactorEnum.HOUSING_ELECTRICITY],
+    emissionFactor: EmissionsFactorEnum.HOUSING_ELECTRICITY,
+    category: EmissionCategories.HOUSING,
+    defaultPeriod: ConsumptionPeriodEnum.MONTH,
+    unit: 'kWh',
+}
+```
 
 ## Run entire application with Docker Compose
 
@@ -13,6 +23,8 @@ $ docker compose up --build
 ## Backend: Run standalone
 
 You can make resquests in the swagger in `/docs`
+
+Download the [Insomnia collection]("insomnia-collection.json") to easier test the backend routes
 
 ### Before All
 
@@ -67,14 +79,3 @@ $ yarn install
 # development
 $ yarn start
 ```
-
-## Features
-
-- [x] All routes
-- [x] Unit tests
-- [x] Swagger base_url/docs
-- [x] Added insomnia-collection.json that can be imported into Insomnia or Postman
-- [x] ESLint/Prettier
-- [ ] Solve the 'TODO's comments (control+shift+f and search for 'TODO')
-- [x] Use a param validator like 'class-validator'
-- [x] Dockerize application

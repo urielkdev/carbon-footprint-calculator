@@ -13,7 +13,7 @@ export const EmissionsFactorTitleMapper: Record<EmissionsFactorEnum, string> = {
   [EmissionsFactorEnum.TRAVEL_VEHICLE]: 'Vehicle',
   [EmissionsFactorEnum.TRAVEL_BUS]: 'Bus',
   [EmissionsFactorEnum.TRAVEL_METRO]: 'Metro',
-  [EmissionsFactorEnum.TRAVEL_TAXI]: 'Taxo',
+  [EmissionsFactorEnum.TRAVEL_TAXI]: 'Taxi',
   [EmissionsFactorEnum.TRAVEL_RAIL]: 'Rail',
   [EmissionsFactorEnum.TRAVEL_FLYING]: 'Flight',
 

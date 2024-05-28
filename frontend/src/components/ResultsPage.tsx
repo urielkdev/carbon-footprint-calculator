@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Alert, Box, Container, Snackbar, Typography } from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 import { CHART_COLORS } from '../constants';
@@ -14,6 +14,7 @@ const ResultsPage: React.FC = () => {
     ApiCalculateConsumptionsResType[]
   >([]);
   const [totalEmissions, setTotalEmissions] = useState<number>(0);
+  const [snackbar, setSnackbar] = React.useState({ open: false, message: '' });
 
   const fetchDatas = useCallback(async () => {
     try {
@@ -21,8 +22,8 @@ const ResultsPage: React.FC = () => {
 
       setCalculatedConsumptions(response.consumptions);
       setTotalEmissions(response.totalEmissions);
-    } catch (error) {
-      // TODO: show an alert with the error
+    } catch (error: any) {
+      setSnackbar({ open: true, message: error.message });
     }
   }, [consumptions]);
 
@@ -75,6 +76,25 @@ const ResultsPage: React.FC = () => {
           <Legend />
         </PieChart>
       </Box>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={() =>
+          setSnackbar((prevState) => ({ ...prevState, open: false }))
+        }
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert
+          onClose={() =>
+            setSnackbar((prevState) => ({ ...prevState, open: false }))
+          }
+          severity="error"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
