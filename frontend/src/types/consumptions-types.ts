@@ -10,8 +10,6 @@ export type ConsumptionType = {
   period: string;
 };
 
-// export type ConsumptionsType = ConsumptionType[];
-
 export type ConsumptionsType = {
   [key: string]: ConsumptionType;
 };

@@ -12,7 +12,7 @@ import {
 import React, { useState } from 'react';
 import { CATEGORIES } from '../constants';
 import { EmissionCategories } from '../enums';
-import ConsumptionPage from './HousingPage';
+import ConsumptionPage from './ConsumptionPage';
 import InitialPage from './InitialPage';
 import ResultsPage from './ResultsPage';
 
@@ -36,7 +36,7 @@ const App: React.FC = () => {
     // we render the generic page for this category
     // that way its easier to create more pages in the future
     if (Object.values(EmissionCategories).includes(stepName)) {
-      return <ConsumptionPage category={stepName} />;
+      return <ConsumptionPage key={stepName} category={stepName} />;
     }
 
     switch (step) {
@@ -64,6 +64,7 @@ const App: React.FC = () => {
           alignItems="center"
           justifyContent="center"
         >
+          {/* TODO: improve accessibility */}
           <Stepper activeStep={activeStep} alternativeLabel>
             {steps.map((label) => (
               <Step key={label}>

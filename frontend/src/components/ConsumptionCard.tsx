@@ -11,18 +11,19 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { useCarbonContext } from '../contexts/CarbonContext';
+import { ConsumptionPeriodEnum } from '../enums';
 import { CardType } from '../types';
 
 interface ConsumptionCardProps {
   card: CardType;
 }
 
+// TODO: fix unecessary re-render when calling this component
 const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ card }) => {
   const { consumptions, setConsumptionValue, setConsumptionPeriod } =
     useCarbonContext();
 
   const { title, emissionFactor, defaultPeriod, unit } = card;
-  console.log(consumptions);
 
   const consumptionValue = consumptions[emissionFactor]?.value || 0;
   const consumptionPeriod =
@@ -57,11 +58,13 @@ const ConsumptionCard: React.FC<ConsumptionCardProps> = ({ card }) => {
             onChange={(e: SelectChangeEvent<any>) => handlePeriodChange(e)}
             label="Period"
           >
-            {/* TODO: Change this to iterate the ConsumptionPeriodMapper */}
-            <MenuItem value="day">Day</MenuItem>
-            <MenuItem value="week">Week</MenuItem>
-            <MenuItem value="month">Month</MenuItem>
-            <MenuItem value="year">Year</MenuItem>
+            {Object.values(ConsumptionPeriodEnum).map((period) => {
+              return (
+                <MenuItem key={period} value={period}>
+                  {period.charAt(0).toUpperCase() + period.slice(1)}
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
       </CardContent>

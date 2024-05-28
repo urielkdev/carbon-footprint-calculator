@@ -1,21 +1,39 @@
 import { Box, Container, Typography } from '@mui/material';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Cell, Legend, Pie, PieChart, Tooltip } from 'recharts';
 import { CHART_COLORS } from '../constants';
 import { useCarbonContext } from '../contexts/CarbonContext';
-import { sumConsumptionsValues } from '../utils';
+import { EmissionsFactorTitleMapper } from '../mappers';
+import { ApiCalculateConsumptionsResType } from '../types';
+import { api } from '../utils';
 
 const ResultsPage: React.FC = () => {
   const { consumptions } = useCarbonContext();
 
-  // TODO: calculate within a backend api the totalEmissions
-  // and consumption for each category to put in the chart
-  const totalEmissions = sumConsumptionsValues(consumptions);
+  const [calculatedConsumptions, setCalculatedConsumptions] = useState<
+    ApiCalculateConsumptionsResType[]
+  >([]);
+  const [totalEmissions, setTotalEmissions] = useState<number>(0);
+
+  const fetchDatas = useCallback(async () => {
+    try {
+      const response = await api.calculateConsumptions(consumptions);
+
+      setCalculatedConsumptions(response.consumptions);
+      setTotalEmissions(response.totalEmissions);
+    } catch (error) {
+      // TODO: show an alert with the error
+    }
+  }, [consumptions]);
+
+  useEffect(() => {
+    fetchDatas();
+  }, [fetchDatas]);
 
   // TODO: change this
-  const data = Object.keys(consumptions).map((key) => ({
-    name: key,
-    value: consumptions[key].value,
+  const data = calculatedConsumptions.map(({ emissionFactor, emissions }) => ({
+    name: EmissionsFactorTitleMapper[emissionFactor],
+    value: emissions,
   }));
 
   return (

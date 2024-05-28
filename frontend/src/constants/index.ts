@@ -5,6 +5,7 @@ import {
 } from '../enums';
 import { CardType } from '../types';
 
+// TODO: add more cards here
 export const CARDS: CardType[] = [
   {
     title: 'Electricity',
